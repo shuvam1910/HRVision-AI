@@ -1,0 +1,83 @@
+{
+    "users": {
+        "admin@hr.com": {
+            "username": "admin@hr.com",
+            "password": "240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9",
+            "name": "Shuvam Nayak",
+            "role": "Admin",
+            "approved": true,
+            "created_at": "2026-07-05T11:53:05.968397"
+        },
+        "user@hr.com": {
+            "username": "user@hr.com",
+            "password": "e606e38b0d8c19b24cf0ee3808183162ea7cd63ff7912dbb22b5e803286b4446",
+            "name": "John Doe (HR User)",
+            "role": "User",
+            "approved": true,
+            "created_at": "2026-07-05T11:53:05.981924"
+        }
+    },
+    "logs": [
+        {
+            "username": "user@hr.com",
+            "action": "Login",
+            "details": "User logged in with role: User",
+            "timestamp": "2026-07-05T11:54:14.727619"
+        },
+        {
+            "username": "user@hr.com",
+            "action": "Logout",
+            "details": "User logged out",
+            "timestamp": "2026-07-05T11:55:20.622235"
+        },
+        {
+            "username": "user@hr.com",
+            "action": "Login",
+            "details": "User logged in with role: User",
+            "timestamp": "2026-07-05T14:28:38.559576"
+        },
+        {
+            "username": "user@hr.com",
+            "action": "Login",
+            "details": "User logged in with role: User",
+            "timestamp": "2026-07-05T14:30:03.658820"
+        },
+        {
+            "username": "user@hr.com",
+            "action": "Logout",
+            "details": "User logged out",
+            "timestamp": "2026-07-05T14:31:11.789005"
+        },
+        {
+            "username": "admin@hr.com",
+            "action": "Login",
+            "details": "User logged in with role: Admin",
+            "timestamp": "2026-07-05T14:31:47.860188"
+        },
+        {
+            "username": "admin@hr.com",
+            "action": "Login",
+            "details": "User logged in with role: Admin",
+            "timestamp": "2026-07-05T14:35:34.337594"
+        },
+        {
+            "username": "admin@hr.com",
+            "action": "Single Prediction",
+            "details": "Calculated risk: 4.0%",
+            "timestamp": "2026-07-05T14:36:56.700304"
+        },
+        {
+            "username": "admin@hr.com",
+            "action": "Single Prediction",
+            "details": "Calculated risk: 4.0%",
+            "timestamp": "2026-07-05T14:38:13.435619"
+        },
+        {
+            "username": "admin@hr.com",
+            "action": "Chatbot Query",
+            "details": "Query: hi i want to employee",
+            "timestamp": "2026-07-05T14:44:04.730506"
+        }
+    ],
+    "notifications": []
+}

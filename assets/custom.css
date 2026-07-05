@@ -1,0 +1,242 @@
+/* Custom Premium Styling for HR Analytics Dashboard */
+
+/* Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+/* Apply Outfit font globally in Streamlit */
+html, body, [class*="css"], .stApp {
+    font-family: 'Outfit', sans-serif !important;
+}
+
+/* Clean Borderless Card Style (Removed extra boxes) */
+.glass-card {
+    background: transparent !important;
+    border: none !important;
+    padding: 10px 0px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+/* Clean Borderless KPI Card (Removed extra boxes) */
+.glass-kpi {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 10px;
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+    color: var(--text-color);
+}
+
+.glass-kpi::before {
+    display: none !important; /* Remove vertical stripe */
+}
+
+/* KPI Typography */
+.kpi-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-color);
+    opacity: 0.75;
+    margin-bottom: 8px;
+}
+
+.kpi-value {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--text-color);
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.kpi-delta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.kpi-delta.positive {
+    color: #34d399;
+}
+
+.kpi-delta.negative {
+    color: #f87171;
+}
+
+/* Sub-card/Badge Indicators */
+.metric-badge {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #ffffff;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Header gradient banner */
+.gradient-header {
+    background: linear-gradient(90deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+/* Custom Chatbot Message Styling */
+.chat-bubble-user {
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.25);
+    border-radius: 14px 14px 2px 14px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    margin-left: 20%;
+    color: #f3f4f6;
+    text-align: right;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.chat-bubble-bot {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px 14px 14px 2px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+    margin-right: 20%;
+    color: #f3f4f6;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Activity Logs List */
+.activity-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.85rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-time {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.75rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}
+
+/* Adaptability for Light Mode streamlit theme */
+@media (prefers-color-scheme: light) {
+    .glass-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .glass-card h1, .glass-card h2, .glass-card h3, .glass-card h4, .glass-card strong {
+        color: #000000 !important;
+    }
+    
+    .glass-card, .glass-card p, .glass-card span, .glass-card td, .glass-card th, .glass-card li, .glass-card label, .glass-card div {
+        color: #000000 !important;
+    }
+    
+    .glass-kpi {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .kpi-title {
+        color: #111111 !important;
+        font-weight: 600 !important;
+    }
+    
+    .kpi-value {
+        color: #000000 !important;
+        font-weight: 800 !important;
+    }
+    
+    .metric-badge {
+        background: rgba(99, 102, 241, 0.12);
+        color: #4f46e5 !important;
+        border-color: rgba(99, 102, 241, 0.2);
+    }
+    
+    .chat-bubble-user {
+        background: rgba(99, 102, 241, 0.1);
+        border-color: rgba(99, 102, 241, 0.2);
+        color: #000000 !important;
+        font-weight: 500;
+    }
+    
+    .chat-bubble-bot {
+        background: rgba(0, 0, 0, 0.05);
+        border-color: rgba(0, 0, 0, 0.1);
+        color: #111111 !important;
+        font-weight: 500;
+    }
+    
+    .activity-item {
+        border-bottom-color: rgba(0, 0, 0, 0.08);
+    }
+    
+    .activity-time {
+        color: #374151 !important;
+    }
+    
+    /* Make text/inputs darker and bolder in light mode */
+    p, span, label, li, input, select, textarea {
+        color: #111111 !important;
+        font-weight: 500 !important;
+    }
+
+    /* Target sidebar items specifically to make them bold and dark */
+    section[data-testid="stSidebar"] p, 
+    section[data-testid="stSidebar"] span, 
+    section[data-testid="stSidebar"] label, 
+    section[data-testid="stSidebar"] li {
+        color: #0d0d0d !important;
+        font-weight: 600 !important;
+        font-size: 0.96rem !important;
+    }
+
+    /* Target buttons in general and buttons in sidebar */
+    button p, 
+    button span, 
+    [data-testid="stBaseButton-secondary"] p,
+    [data-testid="stBaseButton-primary"] p {
+        color: #050505 !important;
+        font-weight: 600 !important;
+        font-size: 0.98rem !important;
+    }
+}
+
+/* Hide Streamlit Branding, Footers, and Main Menu Version Badge Safely */
+footer, [data-testid="stFooter"] {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+[class*="streamlit-version"], .streamlit-version {
+    display: none !important;
+    visibility: hidden !important;
+}
