@@ -5,7 +5,7 @@ import hashlib
 from pymongo import MongoClient
 
 class DatabaseManager:
-    def __init__(self, uri="mongodb://localhost:27017/", db_name="hr_analytics_db"):
+    def __init__(self, uri=None, db_name="hr_analytics_db"):
         self.uri = os.environ.get("MONGODB_URI", uri)
         self.db_name = db_name
         self.use_mongo = False
@@ -13,7 +13,7 @@ class DatabaseManager:
         self.db = None
         
         # Paths for local file database
-        self.local_dir = r"c:\Users\SHUVAM NAYAK\Downloads\projecttt\data"
+        self.local_dir = os.path.join(os.getcwd(), "data")
         self.local_file = os.path.join(self.local_dir, "local_db.json")
         os.makedirs(self.local_dir, exist_ok=True)
         
