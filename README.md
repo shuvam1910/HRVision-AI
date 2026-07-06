@@ -4,13 +4,16 @@
 
 **Predict • Analyze • Retain**
 
+ **Live Demo:**https://hrvision-ai.onrender.com
+
+
 HRVision AI is an AI-powered Human Resource Analytics platform that helps organizations predict employee attrition, analyze workforce trends, and support data-driven HR decision-making using Machine Learning and interactive dashboards.
 
 The platform combines predictive analytics, workforce analytics, bulk employee prediction, automated reporting, and AI-powered insights into a modern HR analytics solution suitable for enterprise environments.
 
 ---
 
-# 📌 Project Overview
+#  Project Overview
 
 Employee attrition is one of the biggest challenges faced by organizations. HRVision AI enables HR professionals to identify employees at risk of leaving, analyze workforce behavior, and make proactive retention decisions using Machine Learning.
 
@@ -18,7 +21,7 @@ The application provides an interactive dashboard, employee attrition prediction
 
 ---
 
-# 🎯 Objectives
+#  Objectives
 
 - Predict employee attrition using Machine Learning.
 - Analyze workforce trends through interactive dashboards.
@@ -29,16 +32,16 @@ The application provides an interactive dashboard, employee attrition prediction
 
 ---
 
-# ✨ Key Features
+#  Key Features
 
-## 🔐 Authentication
+## Authentication
 
 - Secure Login System
 - User Registration
 - Session Management
 - Admin Dashboard
 
-## 📊 Interactive Dashboard
+## Interactive Dashboard
 
 - Employee Statistics
 - Attrition Rate
@@ -46,21 +49,21 @@ The application provides an interactive dashboard, employee attrition prediction
 - Workforce KPIs
 - Interactive Charts
 
-## 🤖 Employee Attrition Prediction
+## Employee Attrition Prediction
 
 - Single Employee Prediction
 - Prediction Confidence
 - Risk Classification
 - HR Recommendations
 
-## 📂 Bulk Employee Analysis
+## Bulk Employee Analysis
 
 - Upload Employee CSV
 - Batch Predictions
 - Risk Summary
 - Download Prediction Results
 
-## 📈 Workforce Analytics
+## Workforce Analytics
 
 - Department Analysis
 - Salary Distribution
@@ -69,19 +72,19 @@ The application provides an interactive dashboard, employee attrition prediction
 - Overtime Analysis
 - Employee Demographics
 
-## 🧠 Explainable AI
+## Explainable AI
 
 - Model Explainability
 - Feature Contribution
 - Prediction Interpretation
 
-## 💬 AI Chatbot
+## AI Chatbot
 
 - HR Analytics Assistant
 - Employee Insights
 - Interactive Support
 
-## 📄 Reports
+##  Reports
 
 - PDF Reports
 - Word Reports
@@ -135,7 +138,7 @@ The application provides an interactive dashboard, employee attrition prediction
 
 ---
 
-# 🤖 Machine Learning Workflow
+# Machine Learning Workflow
 
 ```text
 IBM HR Analytics Dataset
@@ -164,7 +167,7 @@ HR Decision Support
 
 ---
 
-# 📁 Project Structure
+# Project Structure
 
 ```text
 HRVISION-AI
@@ -204,8 +207,8 @@ HRVISION-AI
 │   ├── analytics.png
 │   ├── chatbot.png
 │   ├── reports.png
-│   ├── admin.png
-│   └── about.png
+│   ├── employe.png
+│   
 │
 ├── .gitignore
 ├── main.py
@@ -215,7 +218,7 @@ HRVISION-AI
 
 ---
 
-# ⚙️ Installation
+#  Installation
 
 ## Clone Repository
 
@@ -250,21 +253,21 @@ streamlit run main.py
 
 ---
 
-# 📊 Application Modules
+#  Application Modules
 
-- 🔐 Login & Authentication
-- 👨‍💼 Admin Panel
-- 📊 Dashboard
-- 🤖 Employee Prediction
-- 📂 Bulk Employee Prediction
-- 🧠 Explainable AI
-- 📈 Workforce Analytics
-- 💬 AI Chatbot
-- 📄 Reports
+-  Login & Authentication
+-  Admin Panel
+-  Dashboard
+-  Employee Prediction
+-  Bulk Employee Prediction
+-  Explainable AI
+-  Workforce Analytics
+-  AI Chatbot
+-  Reports
 
 ---
 
-# 📂 Dataset
+# Dataset
 
 **IBM HR Analytics Employee Attrition Dataset**
 
@@ -272,7 +275,7 @@ The dataset contains employee demographic, organizational, and workplace-related
 
 ---
 
-# 🧠 Machine Learning Model
+#  Machine Learning Model
 
 ### Algorithm
 
@@ -284,57 +287,53 @@ Predict whether an employee is likely to leave the organization based on HR-rela
 
 ---
 
-# 📷 Application Screenshots
+# Application Screenshots
 
-## 🔐 Login Page
+##  Login Page
 
 ![Login](screenshots/login.png)
 
 ---
 
-## 📊 Dashboard
+##  Dashboard
 
 ![Dashboard](screenshots/dashboard.png)
 
 ---
 
-## 🤖 Employee Prediction
+##  Employee Prediction
 
 ![Prediction](screenshots/prediction.png)
 
 ---
 
-## 📈 Analytics
+##  Analytics
 
 ![Analytics](screenshots/analytics.png)
 
 ---
 
-## 💬 AI Chatbot
+## AI Chatbot
 
 ![Chatbot](screenshots/chatbot.png)
 
 ---
 
-## 📄 Reports
+## Reports
 
 ![Reports](screenshots/reports.png)
 
 ---
 
-## 👨‍💼 Admin Panel
+##  Employee Profiles
 
-![Admin](screenshots/admin.png)
-
----
-
-## ℹ️ About
-
-![About](screenshots/about.png)
+![Employe](screenshots/employe.png)
 
 ---
 
-# 🚀 Future Enhancements
+
+
+# Future Enhancements
 
 - React + FastAPI Version
 - Explainable AI using SHAP
@@ -346,7 +345,7 @@ Predict whether an employee is likely to leave the organization based on HR-rela
 
 ---
 
-# 👨‍💻 Developer
+#  Developer
 
 ## Shuvam Nayak
 
@@ -354,13 +353,13 @@ Predict whether an employee is likely to leave the organization based on HR-rela
 
 ---
 
-# 📜 License
+# License
 
 This project is developed for educational, research, and portfolio purposes.
 
 ---
 
-# 🙏 Acknowledgements
+#  Acknowledgements
 
 - IBM HR Analytics Employee Attrition Dataset
 - Scikit-learn
@@ -371,7 +370,7 @@ This project is developed for educational, research, and portfolio purposes.
 
 ---
 
-## ⭐ Support
+##  Support
 
 If you found this project useful, consider giving this repository a **Star ⭐** on GitHub.
 
