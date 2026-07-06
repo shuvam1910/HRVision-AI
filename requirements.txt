@@ -10,4 +10,4 @@ plotly>=5.15.0
 matplotlib>=3.7.0
 seaborn>=0.12.0
 python-docx>=0.8.11
-
+dnspython>=2.0.0

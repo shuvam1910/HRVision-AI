@@ -6,7 +6,16 @@ from pymongo import MongoClient
 
 class DatabaseManager:
     def __init__(self, uri=None, db_name="hr_analytics_db"):
-        self.uri = os.environ.get("MONGODB_URI", uri)
+        # Attempt to load from Streamlit secrets first, then environment variable, then parameter
+        secrets_uri = None
+        try:
+            import streamlit as st
+            if hasattr(st, "secrets") and "MONGODB_URI" in st.secrets:
+                secrets_uri = st.secrets["MONGODB_URI"]
+        except Exception:
+            pass
+
+        self.uri = secrets_uri or os.environ.get("MONGODB_URI", uri)
         self.db_name = db_name
         self.use_mongo = False
         self.mongo_client = None
@@ -19,12 +28,17 @@ class DatabaseManager:
         
         # Attempt MongoDB connection
         try:
-            print("Mongo URI:", self.uri)
+            if self.uri:
+                import re
+                masked_uri = re.sub(r'://([^:]+):([^@]+)@', r'://\1:****@', self.uri)
+                print("Mongo URI:", masked_uri)
+            else:
+                print("Mongo URI: None")
 
             self.mongo_client = MongoClient(
-            self.uri,
-            serverSelectionTimeoutMS=5000
-             )
+                self.uri,
+                serverSelectionTimeoutMS=5000
+            )
 
             self.mongo_client.server_info()
 
@@ -32,12 +46,12 @@ class DatabaseManager:
             self.use_mongo = True
 
             print("MongoDB Connected Successfully")
-        except Exception as e :
-                print("MongoDB Connection Error:")
-                print(e)
+        except Exception as e:
+            print("MongoDB Connection Error:")
+            print(e)
 
-                self.use_mongo = False
-                self._init_local_db()
+            self.use_mongo = False
+            self._init_local_db()
             
         # Seed default admin and user
         self._seed_default_users()

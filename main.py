@@ -71,7 +71,7 @@ def main():
     st.sidebar.write("")
     if st.sidebar.button("🚪 Log Out", use_container_width=True):
         logout()
-        
+
     # Page Router
     if selected_page == "Overview":
         render_dashboard_page()
