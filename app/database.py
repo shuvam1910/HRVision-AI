@@ -19,14 +19,25 @@ class DatabaseManager:
         
         # Attempt MongoDB connection
         try:
-            self.mongo_client = MongoClient(self.uri, serverSelectionTimeoutMS=2500)
-            # Trigger exception if connection fails
+            print("Mongo URI:", self.uri)
+
+            self.mongo_client = MongoClient(
+            self.uri,
+            serverSelectionTimeoutMS=5000
+             )
+
             self.mongo_client.server_info()
+
             self.db = self.mongo_client[self.db_name]
             self.use_mongo = True
+
+            print("MongoDB Connected Successfully")
         except Exception:
-            self.use_mongo = False
-            self._init_local_db()
+                print("MongoDB Connection Error:")
+                print(e)
+
+                self.use_mongo = False
+                self._init_local_db()
             
         # Seed default admin and user
         self._seed_default_users()
