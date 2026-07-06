@@ -17,6 +17,7 @@ from app.views.prediction import render_prediction_page
 from app.views.explainability import render_explainability_page
 from app.views.chatbot_view import render_chatbot_page
 from app.views.reports_view import render_reports_page
+from app.views.admin import render_admin_page
 
 def main():
     # Inject Custom CSS styles
@@ -51,6 +52,10 @@ def main():
     # Build Menu Navigation
     menu_options = ["Overview", "Employee Directory", "Predictive Portal", "SHAP Explainability", "AI Copilot Chat", "Executive Reports"]
     menu_icons = ["bar-chart-fill", "people-fill", "cpu-fill", "eye-fill", "chat-square-dots-fill", "download"]
+    
+    if st.session_state.user_role == "Admin":
+        menu_options.append("Admin Control")
+        menu_icons.append("shield-lock-fill")
         
     selected_page = option_menu(
         menu_title="Navigation",
@@ -85,6 +90,8 @@ def main():
         render_chatbot_page()
     elif selected_page == "Executive Reports":
         render_reports_page()
+    elif selected_page == "Admin Control":
+        render_admin_page()
 
 if __name__ == "__main__":
     main()

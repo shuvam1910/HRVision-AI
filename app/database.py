@@ -28,12 +28,12 @@ class DatabaseManager:
         
         # Attempt MongoDB connection
         try:
-            if self.uri:
-                import re
-                masked_uri = re.sub(r'://([^:]+):([^@]+)@', r'://\1:****@', self.uri)
-                print("Mongo URI:", masked_uri)
-            else:
-                print("Mongo URI: None")
+            if not self.uri:
+                raise ValueError("MONGODB_URI is not configured.")
+
+            import re
+            masked_uri = re.sub(r'://([^:]+):([^@]+)@', r'://\1:****@', self.uri)
+            print("Mongo URI:", masked_uri)
 
             self.mongo_client = MongoClient(
                 self.uri,

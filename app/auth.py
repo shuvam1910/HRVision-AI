@@ -25,34 +25,33 @@ def render_login_form():
     st.subheader("Welcome Back")
     st.markdown('<div style="font-size: 1.05rem; font-weight: 600; color: var(--text-color); opacity: 0.85; margin-bottom: 20px; line-height: 1.4;">Sign in to access intelligent workforce analytics, employee insights, and predictive HR tools.</div>', unsafe_allow_html=True)
     
-    username = st.text_input("Username (Email)", placeholder="e.g. user@hr.com", key="login_user")
-    password = st.text_input("Password", type="password", placeholder="••••••••", key="login_pass")
-    
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("Log In", use_container_width=True, type="primary"):
-            if not username or not password:
-                st.error("Please fill in all fields")
-            else:
-                user = db_mgr.verify_user(username, password)
-                if user:
-                    if not user.get("approved", False):
-                        st.warning("Your account is pending approval. Please contact your administrator.")
-                    else:
-                        st.session_state.logged_in = True
-                        st.session_state.username = user["username"]
-                        st.session_state.user_role = user["role"]
-                        st.session_state.user_name = user["name"]
-                        db_mgr.log_activity(user["username"], "Login", f"User logged in with role: {user['role']}")
-                        st.success(f"Welcome back, {user['name']}!")
-                        st.rerun()
+    with st.form("login_form", clear_on_submit=False):
+        username = st.text_input("Username (Email)", placeholder="e.g. user@hr.com", key="login_user")
+        password = st.text_input("Password", type="password", placeholder="••••••••", key="login_pass")
+        submit_clicked = st.form_submit_button("Log In", use_container_width=True, type="primary")
+        
+    if submit_clicked:
+        if not username or not password:
+            st.error("Please fill in all fields")
+        else:
+            user = db_mgr.verify_user(username, password)
+            if user:
+                if not user.get("approved", False):
+                    st.warning("Your account is pending approval. Please contact your administrator.")
                 else:
-                    st.error("Invalid username or password")
+                    st.session_state.logged_in = True
+                    st.session_state.username = user["username"]
+                    st.session_state.user_role = user["role"]
+                    st.session_state.user_name = user["name"]
+                    db_mgr.log_activity(user["username"], "Login", f"User logged in with role: {user['role']}")
+                    st.success(f"Welcome back, {user['name']}!")
+                    st.rerun()
+            else:
+                st.error("Invalid username or password")
                     
-    with col2:
-        if st.button("Need Account? Register", use_container_width=True):
-            st.session_state.auth_mode = "register"
-            st.rerun()
+    if st.button("Need Account? Register", use_container_width=True):
+        st.session_state.auth_mode = "register"
+        st.rerun()
             
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -62,48 +61,46 @@ def render_registration_form():
     st.subheader("Request Account Access")
     st.caption("Create a new user account to access the platform.")
     
-    fullname = st.text_input("Full Name", placeholder="e.g. Jane Doe", key="reg_name")
-    email = st.text_input("Email (will be username)", placeholder="e.g. jane.doe@company.com", key="reg_email")
-    password = st.text_input("Password", type="password", placeholder="Minimum 6 characters", key="reg_pass")
-    
-    role = st.selectbox(
-        "Access Role",
-        options=["User", "Admin"],
-        help="Select the access level appropriate for your position."
-    )
-    
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("Submit Registration", use_container_width=True, type="primary"):
-            if not fullname or not email or not password:
-                st.error("Please fill in all fields")
-            elif len(password) < 6:
-                st.error("Password must be at least 6 characters")
-            elif "@" not in email:
-                st.error("Please enter a valid email address")
-            elif db_mgr.find_user(email):
-                st.error("An account with this email already exists")
-            else:
-                # Auto-approve set to True
-                db_mgr.create_user(
-                    username=email,
-                    password=password,
-                    name=fullname,
-                    role=role,
-                    approved=True
-                )
-                db_mgr.log_activity("System", "Registration Completed", f"New user {email} created with {role} role")
-                db_mgr.create_notification(
-                    title="New Registration",
-                    message=f"{fullname} ({email}) registered as {role}",
-                    severity="info"
-                )
-                st.success("Account created successfully! You can now log in immediately.")
+    with st.form("registration_form", clear_on_submit=False):
+        fullname = st.text_input("Full Name", placeholder="e.g. Jane Doe", key="reg_name")
+        email = st.text_input("Email (will be username)", placeholder="e.g. jane.doe@company.com", key="reg_email")
+        password = st.text_input("Password", type="password", placeholder="Minimum 6 characters", key="reg_pass")
+        role = st.selectbox(
+            "Access Role",
+            options=["User", "Admin"],
+            help="Select the access level appropriate for your position."
+        )
+        submit_clicked = st.form_submit_button("Submit Registration", use_container_width=True, type="primary")
+        
+    if submit_clicked:
+        if not fullname or not email or not password:
+            st.error("Please fill in all fields")
+        elif len(password) < 6:
+            st.error("Password must be at least 6 characters")
+        elif "@" not in email:
+            st.error("Please enter a valid email address")
+        elif db_mgr.find_user(email):
+            st.error("An account with this email already exists")
+        else:
+            # Auto-approve set to True
+            db_mgr.create_user(
+                username=email,
+                password=password,
+                name=fullname,
+                role=role,
+                approved=True
+            )
+            db_mgr.log_activity("System", "Registration Completed", f"New user {email} created with {role} role")
+            db_mgr.create_notification(
+                title="New Registration",
+                message=f"{fullname} ({email}) registered as {role}",
+                severity="info"
+            )
+            st.success("Account created successfully! You can now log in immediately.")
                 
-    with col2:
-        if st.button("Back to Login", use_container_width=True):
-            st.session_state.auth_mode = "login"
-            st.rerun()
+    if st.button("Back to Login", use_container_width=True):
+        st.session_state.auth_mode = "login"
+        st.rerun()
             
     st.markdown("</div>", unsafe_allow_html=True)
 
@@ -119,6 +116,19 @@ def check_login():
         st.markdown('<div style="font-size: 1.35rem; font-weight: 750; color: var(--text-color); margin-bottom: 5px;">Enterprise HR Analytics & Employee Intelligence Platform</div>', unsafe_allow_html=True)
         st.markdown('<div style="font-size: 1.05rem; font-weight: 800; color: var(--text-color); opacity: 0.7; margin-bottom: 25px; letter-spacing: 0.1em; text-transform: uppercase;">Predict &bull; Analyze &bull; Retain</div>', unsafe_allow_html=True)
         
+        # Database Status Diagnostics
+        db_status = st.session_state.get("db_status", "Local JSON Fallback")
+        if db_status == "Local JSON Fallback":
+            st.warning(
+                "⚠️ **Database Warning: Local JSON Fallback Active**\n\n"
+                "The application is not connected to MongoDB. Any new accounts registered here are temporary and will be lost when Render restarts the service. "
+                "To connect persistently, please:\n"
+                "1. Add the `MONGODB_URI` environment variable under **Environment Variables** in your Render dashboard.\n"
+                "2. Set MongoDB Atlas Network Access to allow access from **0.0.0.0/0** (anywhere)."
+            )
+        else:
+            st.success("🟢 **Database Status: Connected to MongoDB Cloud**")
+
         if st.session_state.auth_mode == "login":
             render_login_form()
         else:
