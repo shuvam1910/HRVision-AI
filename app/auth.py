@@ -111,12 +111,37 @@ def check_login():
     if "auth_mode" not in st.session_state:
         st.session_state.auth_mode = "login"
         
+    # Auto-login check if cookie is present and logout wasn't triggered in this session
     if not st.session_state.logged_in:
+        cookie_username = st.context.cookies.get("hrvision_username")
+        if cookie_username and not st.session_state.get("logged_out_this_session", False):
+            user = db_mgr.find_user(cookie_username)
+            if user and user.get("approved", False):
+                st.session_state.logged_in = True
+                st.session_state.username = user["username"]
+                st.session_state.user_role = user["role"]
+                st.session_state.user_name = user["name"]
+                db_mgr.log_activity(user["username"], "Auto-Login", "User auto-logged in via persistent cookie")
+                st.rerun()
+        
+    if not st.session_state.logged_in:
+        # Clear browser cookie if we logged out this session
+        if st.context.cookies.get("hrvision_username"):
+            st.components.v1.html(
+                """
+                <script>
+                    parent.document.cookie = "hrvision_username=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=Lax";
+                </script>
+                """,
+                height=0,
+                width=0
+            )
+
         st.markdown('<div class="gradient-header" style="font-size: 3rem; margin-top: 20px; margin-bottom: 5px;">HRVision AI</div>', unsafe_allow_html=True)
         st.markdown('<div style="font-size: 1.35rem; font-weight: 750; color: var(--text-color); margin-bottom: 5px;">Enterprise HR Analytics & Employee Intelligence Platform</div>', unsafe_allow_html=True)
         st.markdown('<div style="font-size: 1.05rem; font-weight: 800; color: var(--text-color); opacity: 0.7; margin-bottom: 25px; letter-spacing: 0.1em; text-transform: uppercase;">Predict &bull; Analyze &bull; Retain</div>', unsafe_allow_html=True)
         
-        # Database Status Diagnostics
+        # Database Status Diagnostics (Only warn if it is local JSON fallback)
         db_status = st.session_state.get("db_status", "Local JSON Fallback")
         if db_status == "Local JSON Fallback":
             st.warning(
@@ -126,8 +151,6 @@ def check_login():
                 "1. Add the `MONGODB_URI` environment variable under **Environment Variables** in your Render dashboard.\n"
                 "2. Set MongoDB Atlas Network Access to allow access from **0.0.0.0/0** (anywhere)."
             )
-        else:
-            st.success("🟢 **Database Status: Connected to MongoDB Cloud**")
 
         if st.session_state.auth_mode == "login":
             render_login_form()
@@ -135,6 +158,19 @@ def check_login():
             render_registration_form()
             
         return False
+        
+    # If logged in and cookie is not set in browser, set it
+    if st.session_state.logged_in and not st.context.cookies.get("hrvision_username"):
+        st.components.v1.html(
+            f"""
+            <script>
+                parent.document.cookie = "hrvision_username={st.session_state.username}; path=/; max-age=604800; SameSite=Lax";
+            </script>
+            """,
+            height=0,
+            width=0
+        )
+        
     return True
 
 def logout():
@@ -145,4 +181,5 @@ def logout():
     st.session_state.username = None
     st.session_state.user_role = None
     st.session_state.user_name = None
+    st.session_state.logged_out_this_session = True
     st.rerun()
