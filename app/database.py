@@ -32,7 +32,7 @@ class DatabaseManager:
             self.use_mongo = True
 
             print("MongoDB Connected Successfully")
-        except Exception:
+        except Exception as e :
                 print("MongoDB Connection Error:")
                 print(e)
 
