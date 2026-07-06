@@ -3,6 +3,8 @@ from app.database import DatabaseManager
 
 # Initialize Database Manager
 db_mgr = DatabaseManager()
+st.sidebar.write("Database Status")
+st.sidebar.success(db_mgr.get_status())
 
 def init_session():
     """Initializes standard session variables if they are not already set."""
