@@ -93,7 +93,7 @@ The application provides an interactive dashboard, employee attrition prediction
 
 ---
 
-# 🛠 Technology Stack
+#  Technology Stack
 
 ## Frontend
 
